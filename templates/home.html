@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %} Youtube Downloader {% endblock %}
+{% block b %}
+<h3 class="text-center " style="margin-top: 70px;"> Youtube Downloader</h3>
+<p class="text-center">Convert and download Youtube videos in MP3, MP4, 3GP for free</p>
+{% if ta is none %}
+<div class="row  ">
+
+    <div class="col-lg-12 ">
+        <form class="justify-content-center" method="POST" action="{% url  'home' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="form-group ">
+                        <input type="url" class="form-control" name="videourl" placeholder="Enter Your Video Url"
+                            style="outline: none;">
+
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary " style="outline: none;">Search</button>
+
+                </div>
+
+            </div>
+           
+        </form>
+
+
+
+    </div>
+
+</div>
+
+{% else %}
+<div class="row">
+
+    <div class="col-lg-8 offset-lg-2 ">
+
+        <div class="row border border-white " style="background-color: white ;">
+
+
+            <div class="card-body col-lg-8 ">
+                <h3 class="card-title">{{ta.title}}</h3>
+                <img class="card-img-bottom border border-light" src="{{ ta.thumbnail_url }}" alt="Card image cap"
+                    style="width: 250px; height:200px">
+              
+
+            </div>
+            <form class="col-lg-4" method="POST" action="{% url 'download' ta.video_id  %}" style="margin-top: 80px;">
+                {% csrf_token %}
+
+                <button type="submit" class="btn btn-lg btn-primary" name="audi" value="1" style="width: 100%;"> Normal
+                    Quality</button>
+                <button type="submit" class="btn btn-lg btn-primary my-3" name="audi" value="2" style="width: 100%;"> Hd
+                    Quality</button>
+                <button type="submit" class="btn btn-lg btn-primary" name="audi" value="3" style="width: 100%;">
+                    Audio</button>
+
+            </form>
+            <div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+</div>
+{% endif %}
+
+
+
+
+
+
+{% endblock %}
